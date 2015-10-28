@@ -1,0 +1,263 @@
+@charset "utf-8";
+body {
+margin:0px;/* IE10 Consumer Preview */ 
+height:100%;
+/*background-image:url(../images/template1/bg.png);*/
+background-repeat: repeat-x;
+background-size: auto 100%;
+
+font-family:Segoe UI;
+}
+input{
+outline:none;
+}
+input[type="text"]{
+  	width: 80%;
+  	height: 20px;
+  	margin: 5px 0% 0 0%;
+    border: solid 1px #ddd;
+    border-top: solid 1px #999;
+  	border-radius: 3px;
+  	padding: 5px 0px ;
+  	text-transform: capitalize;
+
+  }
+  
+ textarea{
+ 	width:100%;
+ 	padding: 5px 10px ;
+ 	height: 60px;
+
+ }
+ .view input[type="text"]{
+  	width: 70%;
+  	height: 20px;
+    border: solid 1px #ddd;
+    border-top: solid 1px #999;
+  	border-radius: 3px;
+  	padding: 5px 10px ;
+  	text-transform: capitalize;
+  }
+ .view textarea{
+ 	width:80%;
+ 	padding: 5px 10px ;	
+ 	height: 50px;
+ }
+table{
+	
+	/*width:80%;*/
+	
+}
+
+#logout{
+			margin-left: 15px;
+			font-size: 13px !important;
+			padding: 3px 2px !important;
+			background-color: #B81212;
+			background:  #B81212;
+			color:#fff;
+			behavior: url(js/js/PIE.htc);
+		position: relative;
+		-webkit-box-shadow: 0px 0px 5px #c2c2c2;
+		box-shadow: 5px 7px 5px #c2c2c2;
+		}
+		
+	#logout:hover, #logout:focus, #logout:active{
+			
+			background:  #A11818;
+			color:#fff;
+			behavior: url(js/js/PIE.htc);
+			position: relative;
+			-webkit-box-shadow: 0px 0px 5px #c2c2c2;
+			box-shadow: 5px 7px 5px #c2c2c2;
+		}
+/*
+#logout{
+	margin: 0px 10px 0 10px;
+	border:none;
+	background: url(../images/logout_button.png);
+	background-size: 100% 98%;
+	color: #fff;
+}*/
+
+.form_title{
+	color: #a71f0e;
+	text-align: center;
+	width: 100%;
+}
+#form_table td{
+	padding-left:70px;
+	text-align:left;
+}
+#summary_table td{
+	padding-left:70px;
+	text-align:left;
+	text-transform: capitalize;
+}
+#user{
+	margin-top: 5px;
+	font-family:Segoe UI;
+	font-size:10pt;
+	float:right;
+	margin-right:50px;
+	
+	}
+#header{
+	height: 85px;
+margin-top: 4px;
+	float:left;
+	width:100%;
+	
+}
+#logo{
+	margin-left:50px;
+	float:left;
+}
+
+#title{
+	font-family:Segoe UI;
+	font-size:20pt;
+	float:right;
+	margin-right:50px;
+	}
+
+#heading{
+	font-family:Segoe UI;
+	font-size:20pt;
+	color:#58ad00;
+	float:right;
+	margin-top:60px;
+	margin-right:-70px;
+	}
+#header_bottom{
+	text-align:center;	
+	
+}
+#content{
+	
+	width: 96%;
+	padding: 0 auto;
+	margin: 0 auto;
+	clear: both;
+	text-align: center;
+	margin-bottom: 30px;
+}
+#content_left{
+	height:inherit;
+	float:left;
+	width:70%;
+}
+.form_top_bg{
+	height:8px;
+	width:100%;
+	float:left;
+	background:url(../images/template1/top_bg.png);
+	background-size:100% 100%;
+}
+.form_middle_bg{
+	height:inherit;
+	width:100%;
+	float:left;
+	background:url(../images/template1/middle_bg.png);
+	background-size:100% 100%;
+	
+}
+.bottom_bg
+{
+	height:20px;
+	width:100%;
+	float:left;
+	background:url(../images/template1/bottom_bg.png);
+	background-size:100% 100%;
+}
+#tab_panel{
+	float:left;
+	width:100%;
+}
+#tab {
+margin:0;
+padding:0;
+}
+#tab li{
+	float:left;
+	margin:0 0 0 5px;
+	list-style-type:none;
+}
+#tab li button{
+	outline:none;
+	background:none;
+	border:none;
+	padding:0 25px ;
+	margin-right:5px;
+	height:30px;
+}
+.off{
+	background-image:url(../images/template1/menu.png);
+	background-repeat:no-repeat;
+	background-size:100% 95%;color:#000 !important;
+}
+.off button{
+	color:#000;
+	}
+	
+.on{
+	background-image:url(../images/template1/menu_hover.png);
+	background-size:100% 100%;
+	
+}
+
+.on button{
+	color:#fff;
+	}
+#form{
+	width:100%;
+	
+	height:auto;
+	float:left;
+}
+.button{
+	outline:none;
+	border:none;
+	padding:0 25px;
+	height:25px;
+	color:#ffffff;
+}
+.blue{
+	background:#0060bc;
+}
+.green{
+	background:#58ad00;	
+}
+.red{
+	background:#ff2200;	
+}
+#content_right{
+
+	float:right;
+	width:28%;
+	height:320px;
+}
+#summary{
+	height: 70%;
+	overflow-y: scroll;
+}
+.emp{
+	color: #000;
+	border:#aaa solid 1px;
+
+}
+#pp_form_view tr td{
+	text-align: center;
+}
+.rule80{
+	width: 90%;
+}
+.error,.success{
+	display:inline-block;
+	color: red;
+	text-align: center;
+}
+.left td{
+	text-align: left;
+	text-indent: 30px;
+}

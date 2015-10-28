@@ -1,0 +1,384 @@
+body{
+				font: 13px/1.231 "Trebuchet MS",Helvetica,sans-serif;
+		}
+		.data-input-form{
+			text-align: center;
+			width: 60%;
+			margin: 0px auto;
+			background: #F9F9F9;
+			border:1px solid #CCC;
+			border-radius:5px;
+			box-shadow: 5px 7px 5px #ccc;
+			-webkit-box-shadow:5px 7px 5px #ccc;
+			padding:10px 75px;
+		}
+		
+		.data-input-form input[type="text"],.data-input-form select,.data-input-form input[type="password"]{
+			width:330px;
+			float:left;
+			height:21px;
+		}
+		
+		input[readonly="readonly"]
+		{
+		    background-color:#E2DFDF;
+		}
+				
+		
+		
+		input[type="password"] {
+			width: 80%;
+			height: 20px;
+			margin: 5px 0% 0 0%;
+			border: solid 1px #ddd;
+			border-top: solid 1px #999;
+			border-radius: 3px;
+			padding: 5px 0px;
+			text-transform: capitalize;
+		}
+		
+		/* #wrapper{
+			min-height: 600px;
+			padding:10px 40px;
+			display: block;
+		}
+		 */
+
+		.sub-title h1{	
+			font: bold 1em "Trebuchet MS",Helvetica,sans-serif ;		
+			display:inline;
+			font-size: 2.15em;
+			color: #333333;
+			text-indent: 0px !important;
+			background:none !important;
+			float:left;
+			
+		}
+		
+		form{
+			  margin: 0 auto;
+			  clear:both;
+		}
+		
+		.control-label{
+			float: left;
+			display: inline;
+			overflow: hidden;
+			width: 200px;
+			text-align: left;
+			padding-top: 12px;
+		}
+		
+		.control-group{
+			clear:both;
+			margin-bottom: 45px;
+		}
+		
+		label, input,input[type="text"], button, select, textarea {
+			font: 13px/1.231 "Trebuchet MS",Helvetica,sans-serif;			
+			
+		}
+		label{
+			font-weight: bold;
+		}
+		select{
+			border: solid 1px #ddd;
+			border-top: solid 1px #999;
+		}
+		
+		.error{
+			padding-top: 10px;
+		}
+		
+		.btn-success {
+			background-color: #8D2A8D !important;
+			background:  #8D2A8D !important;
+			color:#fff !important;
+			
+			-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important;
+  			 behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+		}
+		
+		.btn-success:hover, .btn-success:focus, .btn-success:active{
+		
+			background:  #410741!important;
+			color:#fff;
+				-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important;
+  			 behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		.btn-update {
+			background-color: #62A82C !important;
+			background:  #62A82C !important;
+			color:#fff !important;
+			 
+			-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important;
+  			behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+			
+  			
+		}
+		
+		.btn-update:hover, .btn-update:focus, .btn-update:active{
+		
+			background:  #467D1D!important;
+			color:#fff;
+				-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important;
+  			
+		}
+		
+		.btn-undo {
+			background-color: #363AF7 !important;
+			background:  #363AF7 !important;
+			color:#fff !important;
+			 behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+			-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important;
+  			
+		}
+		
+		.btn-undo:hover, .btn-undo:focus, .btn-undo:active{
+		
+			background:  #0E358F!important;
+			color:#fff;
+				-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important;
+  				-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important; 
+  			
+		}
+		
+		.btn-back {
+			background-color: #F57A0F !important;
+			background:  #F57A0F !important;
+			color:#fff !important;
+			 behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+				-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important; 
+  			
+		}
+		
+		.btn-back:hover, .btn-back:focus, .btn-back	:active{
+		
+			background:  #8C4A0F	!important;
+			color:#fff;
+				-webkit-box-shadow: 0px 0px 5px #c2c2c2 !important;
+  			box-shadow: 5px 7px 5px #c2c2c2 !important;
+		}
+		
+		a:ACTIVE ,a:VISITED,a:HOVER{
+			color:#fff;
+		}
+		
+		
+		.paginationhead{
+			
+		}
+		
+		.pagecount{
+			
+			font-weight: normal;
+			font-family: 'PFSquareSansProMedium', 'arial', 'helvetica';
+			font-size: 17px;
+			margin-top: 13px;
+			text-decoration: underline;
+		}
+		
+		.paginationbody{
+			width: 500px;
+			float: right;
+		}
+		
+		
+		
+		.ui-datepicker-trigger{
+			margin-top: 13px;
+			float: left;
+			z-index: 99999;
+		}
+		
+		.term{
+			text-align: center;
+			margin-top: 0px;
+			background-color: #fff;
+			padding-top: 15px;
+			padding-bottom: 15px;
+			border: 1px solid #c2c2c2;
+			border-radius:10px;
+			 behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+		}
+		
+		.range{
+			text-align: center;
+			margin-top: 40px;
+			clear: both;
+			display:block;
+			background-color: #fff;
+			padding-top: 15px;
+			padding-bottom: 15px;
+			border: 1px solid #c2c2c2;
+			border-radius:10px;
+			 behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+		}
+		
+		.fromDate{
+			display: block;width: 200px;float: left;margin-left: 35px; behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+		}
+		
+		.toDate{
+			display: block;width: 200px;float: left;margin-left: 5px;
+			 behavior: url(/hoveyenergy/js/js/PIE.htc);
+			position:relative;
+		}
+		
+		
+		.searchBox{
+			text-align: center;
+			margin-top: 10px;
+			width: 500px;
+			margin: 25px auto;
+			margin-bottom: 5px;
+			background-image: url(/hoveyenergy/images/box-pattern.png);
+			padding-bottom: 10px;
+			
+		}
+		
+		.searchText{
+			width: 230px !important;
+			height: 14px !important;
+			margin-left: 9px !important;
+		}
+		
+		.searchBtn{
+			background-image: url(/hoveyenergy/images/search.png);
+			height: 30px;
+			width: 130px;
+			border-radius: 5px;
+			position: relative;
+			behavior: url(/hoveyenergy/js/js/PIE.htc);
+			margin-left: 5px;
+			background-repeat: no-repeat;top:8px;
+			
+		}
+		
+		
+		.cust:ACTIVE,.cust:VISITED,.cust:FOCUS,.cust:LINK{
+			color: blue;
+		}	
+		.cust:HOVER {
+			color:purple;
+		}
+		
+		td a, td a:VISITED,td a:LINK{
+			color:#fff;
+		}
+		td a:HOVER {
+			color: #B9B9B9;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		  
+	        #pagin {
+				
+			}
+			
+			#pagin li {
+				float: left;
+				padding:4px 4px 2px 0px !important;
+				display: inline;
+				
+			}
+			
+			#pagin li a {
+				display: block;
+				text-decoration: none;
+				color: #717171;
+				font: bold 13px Arial, sans-serif;
+				text-shadow: 0px 1px white;
+				padding: 5px 8px;
+				border:1px solid #ccc;		
+			
+				
+			}
+			
+			#pagin li a.current {
+				color: white;
+				text-shadow: 0px 1px #3f789f;
+				background: #7cb9e5;
+				background: -webkit-linear-gradient(top, #7cb9e5 0%, #57a1d8 100%);
+				background: -moz-linear-gradient(top, #7cb9e5 0%, #57a1d8 100%);
+				background: -o-linear-gradient(top, #7cb9e5 0%, #57a1d8 100%);
+				background: -ms-linear-gradient(top, #7cb9e5 0%, #57a1d8 100%);
+				background: linear-gradient(top, #7cb9e5 0%, #57a1d8 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7cb9e5', endColorstr='#57a1d8',GradientType=0 );
+			}
+			
+			#pagin li a:hover {
+				-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.55);
+				-moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.55);
+				box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.55);
+				background: #fff;
+			
+				background: -webkit-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+				background: -moz-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+				background: -o-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+				background: -ms-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+				background: linear-gradient(top, #fff 0%, #e8e8e8 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#e8e8e8',GradientType=0 );
+			}
+			
+			#pagin li a:active,#pagin li a.current:active {
+				
+			}
+			
+			#pagin li a.current:hover {
+				-webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.9);
+				-moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.9);
+				box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.9);
+				background: #99cefc;
+			
+				background: -webkit-linear-gradient(top, #99cefc 0%, #57a1d8 100%);
+				background: -moz-linear-gradient(top, #99cefc 0%, #57a1d8 100%);
+				background: -o-linear-gradient(top, #99cefc 0%, #57a1d8 100%);
+				background: -ms-linear-gradient(top, #99cefc 0%, #57a1d8 100%);
+				background: linear-gradient(top, #99cefc 0%, #57a1d8 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99cefc', endColorstr='#57a1d8',GradientType=0 );
+			}
+				        
+									
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="PipelineExcel"
+	    class="com.hovey.frontend.common.utility.PipelineExportView">	    
+	</bean>
+	
+	
+	<!-- 
+				for Reports  -->
+				
+	<bean id="commissionXlsReport"	
+	    class="com.hovey.frontend.reports.excel.CommissionXlsReport" >			
+	  </bean>
+	  
+	 <bean id="supplierXlsReport"	
+	    class="com.hovey.frontend.reports.excel.SupplierXlsReport" >			
+	  </bean>
+	
+	<bean id="agentXlsReport"	
+	    class="com.hovey.frontend.reports.excel.AgentXlsReport" >			
+	  </bean>
+	
+	<bean id="agentOrderXlsReport"	
+	    class="com.hovey.frontend.reports.excel.AgentOrderXlsReport" >			
+	  </bean>
+	  
+	<bean id="renewalXlsReport"	
+	    class="com.hovey.frontend.reports.excel.RenewalXlsReport" >			
+	  </bean>
+	  
+	<bean id="agentCommissionXlsReport"	
+	    class="com.hovey.frontend.reports.excel.AgentCommissionXlsReport" >			
+	  </bean>
+	  
+	
+	<bean id="anniversaryPaymentXlsReport"	
+	    class="com.hovey.frontend.reports.excel.AnniversaryPaymentXlsReport" >			
+	  </bean>
+	
+	
+
+</beans>

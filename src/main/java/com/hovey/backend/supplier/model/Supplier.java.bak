@@ -1,0 +1,182 @@
+package com.hovey.backend.supplier.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * 
+ * 
+ * @author JEEVAN
+ *
+ */
+
+@Entity
+@Table(name="supplier")
+public class Supplier {
+
+	@Id
+	@GeneratedValue
+	@Column(name="supplier_id")
+	private Integer id;
+	
+	
+	@Column(name="account_number",nullable=false)
+	private String accountNumber;
+	
+	@Column(name="utility",nullable=false)
+	private String utility;
+	
+	@Column(name="customer_name",nullable=false)
+	private String customerName;
+	
+	@Column(name="contract_date",nullable=false)
+	private Date contractDate;
+	
+	
+	@Column(name="deal_start_date",nullable=false)
+	private Date dealStartDate;
+
+	@Column(name="deal_end_date",nullable=false)
+	private Date dealEndDate;
+	
+	@Column(name="term",nullable=false)
+	private Integer term;
+	
+	@Column(name="rate",nullable=false)
+	private Double rate;
+
+	@Column(name="annual_kwh",nullable=false)
+	private Integer annualkwh;
+	
+	@Column(name="fee",nullable=false)
+	private Double fee;
+
+	@Column(name="upfront_commission_paid",nullable=false)
+	private Double upfrontCommissionPaid;
+	
+	@Column(name="cutoff",nullable=false)
+	private Date cutOff;
+
+	@Column(name="upfront_paid_date",nullable=false)
+	private Date upfrontPaidDate;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public String getUtility() {
+		return utility;
+	}
+
+	public void setUtility(String utility) {
+		this.utility = utility;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public Date getContractDate() {
+		return contractDate;
+	}
+
+	public void setContractDate(Date contractDate) {
+		this.contractDate = contractDate;
+	}
+
+	public Date getDealStartDate() {
+		return dealStartDate;
+	}
+
+	public void setDealStartDate(Date dealStartDate) {
+		this.dealStartDate = dealStartDate;
+	}
+
+	public Date getDealEndDate() {
+		return dealEndDate;
+	}
+
+	public void setDealEndDate(Date dealEndDate) {
+		this.dealEndDate = dealEndDate;
+	}
+
+	public Integer getTerm() {
+		return term;
+	}
+
+	public void setTerm(Integer term) {
+		this.term = term;
+	}
+
+	public Double getRate() {
+		return rate;
+	}
+
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+
+	public Integer getAnnualkwh() {
+		return annualkwh;
+	}
+
+	public void setAnnualkwh(Integer annualkwh) {
+		this.annualkwh = annualkwh;
+	}
+
+	public Double getFee() {
+		return fee;
+	}
+
+	public void setFee(Double fee) {
+		this.fee = fee;
+	}
+
+	public Double getUpfrontCommissionPaid() {
+		return upfrontCommissionPaid;
+	}
+
+	public void setUpfrontCommissionPaid(Double upfrontCommissionPaid) {
+		this.upfrontCommissionPaid = upfrontCommissionPaid;
+	}
+
+	public Date getCutOff() {
+		return cutOff;
+	}
+
+	public void setCutOff(Date cutOff) {
+		this.cutOff = cutOff;
+	}
+
+	public Date getUpfrontPaidDate() {
+		return upfrontPaidDate;
+	}
+
+	public void setUpfrontPaidDate(Date upfrontPaidDate) {
+		this.upfrontPaidDate = upfrontPaidDate;
+	}
+	
+	
+	
+}

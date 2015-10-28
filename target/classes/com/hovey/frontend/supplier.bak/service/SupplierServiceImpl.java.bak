@@ -1,0 +1,81 @@
+package com.hovey.frontend.supplier.service;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import junit.framework.Assert;
+
+import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Service;
+
+import com.hovey.backend.supplier.model.Supplier;
+import com.hovey.frontend.supplier.dto.SupplierDto;
+
+
+@Service("supplierService")
+public class SupplierServiceImpl implements SupplierService{
+
+	private static Logger log= Logger.getLogger(SupplierServiceImpl.class);
+	
+	
+	public void processExcel(InputStream fileStream,String fileName)throws Exception{
+		log.info("Inside processExcel ");
+		String extension=this.getFileExtension(fileName);
+		ArrayList<SupplierDto> suppliers;
+		
+		
+	}
+		
+	public String getFileExtension(String fileName){
+		org.springframework.util.Assert.notNull(fileName);
+		int mid = fileName.lastIndexOf(".");
+		String ext = fileName.substring(mid + 1, fileName.length());		
+		return ext;
+	}
+	
+	public ArrayList<Supplier> parseExcelData(InputStream is,String extension)throws Exception{
+		Workbook workbook=null;
+		if(extension.equalsIgnoreCase("xlsx"))
+			workbook=new XSSFWorkbook(is);
+		else if(extension.equalsIgnoreCase("xls"))
+			workbook=new HSSFWorkbook(is);
+		int i=workbook.getNumberOfSheets();      // Getting Number of Sheets.
+		System.out.println("Number of Sheets are "+i);
+		ArrayList<Supplier> suppliers=new ArrayList<Supplier>();
+		for(int j=0;j<i;j++){                             // Looping through all the sheets from 0 to i
+			Sheet sheet=workbook.getSheetAt(j);
+			Iterator<Row> rowIterator=sheet.iterator();   // Getting the Row Iterator to iterate from row 0 to n within the sheet			
+			int temp=0;
+			while(rowIterator.hasNext()){
+				Row row=rowIterator.next();   // Iterating to each and Every Row..
+				if(temp>=1){					
+					Supplier supplier=new Supplier();
+					/*if(null!=row.getCell(0))
+						data.setId((int)row.getCell(0).getNumericCellValue());
+					if(null!=row.getCell(1))
+						data.setName(row.getCell(1).getStringCellValue());
+					if(null!=row.getCell(2))
+						data.setTitle(row.getCell(2).getStringCellValue());
+					if(null!=row.getCell(3))
+						data.setCompany(row.getCell(3).getStringCellValue());
+					if(null!=row.getCell(4))
+						data.setIndustry(row.getCell(4).getStringCellValue());
+					if(null!=row.getCell(5))
+						data.setCity(row.getCell(5).getStringCellValue());	
+					dataList.add(data);*/
+				}	
+				temp++;
+			}// End of row Iterator						
+		} //end of For
+		
+		is.close();
+		return suppliers;
+	}
+	
+}

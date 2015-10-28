@@ -1,0 +1,671 @@
+package com.hovey.frontend.supplier.service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Locale;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.util.AutoPopulatingList;
+
+import com.hovey.backend.admin.dao.AdminDao;
+import com.hovey.backend.agent.dao.DealSheetDao;
+import com.hovey.backend.agent.exception.OrderNotFoundException;
+import com.hovey.backend.agent.model.Orders;
+import com.hovey.backend.supplier.dao.SupplierDao;
+import com.hovey.backend.supplier.exception.OrderForSupplierReportAccountNotFoundException;
+import com.hovey.backend.supplier.exception.SupplierFileNotFoundException;
+import com.hovey.backend.supplier.exception.SupplierMappingNotFoundException;
+import com.hovey.backend.supplier.exception.SupplierNotFoundException;
+import com.hovey.backend.supplier.model.Supplier;
+import com.hovey.backend.supplier.model.SupplierFiles;
+import com.hovey.backend.supplier.model.SupplierMapping;
+import com.hovey.backend.supplier.model.SupplierReports;
+import com.hovey.backend.user.model.HoveyUser;
+import com.hovey.frontend.supplier.dto.ReportDto;
+import com.hovey.frontend.supplier.dto.SupplierDto;
+import com.hovey.frontend.supplier.dto.SupplierFilesDto;
+import com.hovey.frontend.supplier.dto.SupplierMappingDto;
+import com.hovey.frontend.supplier.dto.SupplierReportForm;
+import com.hovey.frontend.supplier.dto.SupplierReportsDto;
+
+
+@Service("supplierService")
+public class SupplierServiceImpl implements SupplierService {
+
+	private static Logger log=Logger.getLogger(SupplierServiceImpl.class);
+	
+	@Resource(name="supplierDao")
+	private SupplierDao supplierDao;
+	
+	@Resource(name="dealSheetDao")
+	private DealSheetDao dealSheetDao;
+	
+	@Resource(name="adminDao")
+	private AdminDao adminDao;
+
+	
+	//for saving or Updating supplier
+	public Integer saveorUpdateSuppliertoDAO(SupplierDto supplierDto)throws Exception{
+		log.info("inside saveorUpdateSuppliertoDAO()");
+		Supplier supplier=new Supplier();
+		if(null!=supplierDto.getSupplierId()){
+			supplier.setId(supplierDto.getSupplierId());
+		}
+		supplier.setSupplierName(supplierDto.getSupplierName());
+		supplier.setContractCommission(supplierDto.getContractCommission());
+		supplier.setRenewalCommission(supplierDto.getRenewalCommission());
+		Integer status=this.supplierDao.saveOrUpdateSupplierToDB(supplier);
+		return status;
+	}
+	
+	//getting Supplier by name
+	public SupplierDto getSupplierBySupplierName(String supplierName)throws Exception{
+		log.info("inside getSupplierBySupplierName()");
+		Supplier supplier=this.supplierDao.getSupplierByName(supplierName);
+		SupplierDto supplierDto=SupplierDto.populateSupplier(supplier);
+		return supplierDto;
+		
+	}
+	
+	
+	//getting Supplier by id
+		public SupplierDto getSupplierBySupplierId(Integer supplierId)throws Exception{
+			log.info("inside getSupplierBySupplierName()");
+			Supplier supplier=this.supplierDao.getSupplierByID(supplierId);
+			SupplierDto supplierDto=SupplierDto.populateSupplier(supplier);
+			return supplierDto;
+			
+		}
+		
+		//gets all suppliers from Dao
+		public ArrayList<SupplierDto> getSuppliersFromDAO()throws SupplierNotFoundException{
+			log.info("inside getSuppliersFromDAO()");
+			ArrayList<Supplier> suppliers=this.supplierDao.getSuppliers();
+			ArrayList<SupplierDto> supplierDtos=new ArrayList<SupplierDto>();
+			for(Supplier supplier : suppliers){
+				SupplierDto supplierDto=SupplierDto.populateSupplier(supplier);
+				supplierDtos.add(supplierDto);
+			}
+			return supplierDtos;
+		}
+		
+	
+		//saves or Updates Supplier Mappings
+		public Integer saveorUpdateSupplierMappings(SupplierMappingDto mappingDto)throws Exception{
+			log.info("inside saveOrUpdateSupplierMappings()");
+			
+			SupplierMapping mapping=new SupplierMapping();
+			if(null!=mappingDto.getMappingId()){
+				mapping.setId(mappingDto.getMappingId());
+			}	
+			mapping.setFieldForAccount(mappingDto.getFieldForAccount());
+			mapping.setFieldForAgentID(mappingDto.getFieldForAgemtId());
+			mapping.setFieldForCommissonRate(mappingDto.getFieldForCommissionRate());
+			mapping.setFieldForCustomer(mappingDto.getFieldForCustomer());
+			mapping.setFieldforEndDate(mappingDto.getFieldForEndDate());
+			mapping.setFieldForKwh(mappingDto.getFieldForKwh());
+			mapping.setFieldForPaidDate(mappingDto.getFieldForPaidDate());
+			mapping.setFieldForRate(mappingDto.getFieldForRate());
+			mapping.setFieldforStartDate(mappingDto.getFieldForStartDate());
+			mapping.setFieldForTerm(mappingDto.getFieldForTerm());
+			mapping.setFieldForTotalCommission(mappingDto.getFieldForTotalCommissionPaid());
+			
+			Supplier supplier=this.supplierDao.getSupplierByName(mappingDto.getSupplierName().getSupplierName());
+			mapping.setSupplierName(supplier);
+			Integer status=this.supplierDao.saveorUpdateSupplierMappings(mapping);
+			return status;
+			
+		}
+		
+		
+		//gets all Supplier Mappings...
+		
+		public ArrayList<SupplierMappingDto> getAllMappings()throws SupplierMappingNotFoundException{
+			log.info("inside getAllMappings()");
+			ArrayList<SupplierMapping> mappings=this.supplierDao.getSupplierMappings();
+			ArrayList<SupplierMappingDto> mappingDtos=new ArrayList<SupplierMappingDto>();
+			for(SupplierMapping mapping:mappings){
+				SupplierMappingDto mappingDto=SupplierMappingDto.populateSupplierMappingDto(mapping);
+				mappingDtos.add(mappingDto);
+			}
+			return mappingDtos;
+		}
+		
+		
+		//get Supplier Mapping by Supplier Name;
+		public SupplierMappingDto getSupplierMappingBySupplierName(String supplierName)throws Exception{
+			log.info("inside getSupplierMAppingBySupplierName()");
+			SupplierMapping mapping=this.supplierDao.getSupplierMappingBySupplier(supplierName);
+			SupplierMappingDto	mappingDto=SupplierMappingDto.populateSupplierMappingDto(mapping);
+			return mappingDto;
+		}
+		
+		
+		
+		
+		//Loading Supplier Reports.......
+		/*
+		 * Involves following Steps...
+		 *   1. Getting Supplier Mapping Object
+		 *   2. Sending File info and Mapping Object to parse Excel file using mapping.Field for , finding cell indices and populating Supplier Report Object
+		 *   3. Populating Supplier files object using filename and savinf it into DB
+		 *   4. Assingning Supplierfiles to all the Reports..
+		 *   5. Saving Supplier Reports.
+		 *   6. Updating Pipeline.
+		 * 
+		 * (non-Javadoc)
+		 * @see com.hovey.frontend.supplier.service.SupplierService#getSupplierReportsData(com.hovey.frontend.supplier.dto.ReportDto)
+		 */		
+		@Transactional
+		public ArrayList<SupplierReportsDto> saveSupplierReports(SupplierReportForm reportForm)throws Exception{
+			log.info("inside saveSupplierReports()");
+			String supplierName=reportForm.getReports().get(0).getSupplierName();
+			AutoPopulatingList<ReportDto> reportDtos=reportForm.getReports();
+			Iterator<ReportDto> it=reportDtos.iterator();
+			ArrayList<SupplierReportsDto> parsedSupplierReportsDto=new ArrayList<SupplierReportsDto>(); // collection of all orders contained in Supplier Reports	(master)		
+			while(it.hasNext()){
+				ReportDto reportDto=it.next();
+				reportDto.setSupplierName(supplierName);
+				
+				ArrayList<SupplierReports> parsedSupplierReports=this.getSupplierReportsData(reportDto);   //fetches supplier report of individual file..
+				//adding all the fetched orders to master ordersDto
+				for(SupplierReports report:parsedSupplierReports){
+					SupplierReportsDto repDto=SupplierReportsDto.populateSupplierReportsDto(report);
+					repDto.setFileName(reportDto.getFileName());
+					parsedSupplierReportsDto.add(repDto);
+				}
+				
+			}
+												/*Till now we got all the Records from Excel files,.. Now remaining tasks is to..
+												 * 
+												 * 1. Find out if there exists orders which are not in Pipeline.
+												 * 2. List out all those Orders..
+												 * 3. if(exists those Orders){
+												 *      set boolean value true
+												 * 		return those Orders
+												 * }
+												 * else{
+												 * 			save File,Save Reports, Edit Pipeline..
+												 * 	return all orders
+												 * }
+												 * 
+												 */
+			ArrayList<SupplierReportsDto> ordersNotinPipeline=this.getOrdersNotinPipeline(parsedSupplierReportsDto);
+			if(ordersNotinPipeline.isEmpty()){
+				Iterator<ReportDto> it1=reportDtos.iterator();
+				while(it1.hasNext()){
+					System.out.println("in it");
+					ReportDto report=it1.next();
+					SupplierFiles supplierFile=this.saveSupplierFiles(report.getFileName());					
+				}				
+				ArrayList<SupplierReportsDto> resultDto=this.saveSupplierReportsData(parsedSupplierReportsDto);
+				return resultDto;
+			}
+			else{				
+				return ordersNotinPipeline;
+			}
+			
+				
+		}
+		
+		
+		
+		/*
+		 * Added by Jeevan on Jul 24,2013 .
+		 * 
+		 * A method to find out all the Orders which are not in Pipeline..
+		 */
+		
+		private ArrayList<SupplierReportsDto> getOrdersNotinPipeline(ArrayList<SupplierReportsDto> parsedSupplierReportsDto){
+			log.info("inside getOrdersNotinPipeline()");
+			ArrayList<SupplierReportsDto> ordersNotinPipeline=new ArrayList<SupplierReportsDto>();
+			for(SupplierReportsDto repDto:parsedSupplierReportsDto){
+				try{
+					this.dealSheetDao.getOrderByAccountNumberandStartDate(repDto.getAccountNumber(), repDto.getContractStartDate());
+				}
+				catch(OrderNotFoundException e){
+					repDto.setNoAccountinPipelineforSupplierReports(true);
+					ordersNotinPipeline.add(repDto);
+				}
+			}
+			return ordersNotinPipeline;
+		}
+		
+		
+		/*
+		 * Saving Supplier File..
+		 */
+		public SupplierFiles saveSupplierFiles(String fileName)throws Exception{
+			log.info("inside saveSupplierFiles()" );
+			SupplierFiles file= new SupplierFiles();
+			file.setFileName(fileName);
+			SupplierFiles supplierFile=this.supplierDao.saveSupplierFile(file);			
+			return supplierFile;
+		}
+		
+		
+		
+		
+		
+		
+		/*
+		 * added by Jeevan on July 24,2013.. 
+		 * 
+		 * Takes arraylist of parsed excel reports as argument
+		 * iterates through the arraylist and saves data..
+		 */
+		
+		public ArrayList<SupplierReportsDto> saveSupplierReportsData(ArrayList<SupplierReportsDto> parsedreports)throws Exception{
+			log.info("inside saveSupplierReportsData()");
+			for(SupplierReportsDto report: parsedreports){
+						/*
+						 * 1. Save File
+						 * 2. Save Report
+						 * 3. Edit Pipeline			 * 
+						 */
+				//1
+					
+				
+				//2.
+				SupplierReports rep=new SupplierReports();
+				
+				rep.setAccountNumber(report.getAccountNumber());
+				rep.setAgentId(this.dealSheetDao.getOrderByAccountNumber(report.getAccountNumber()).getAgent());
+				rep.setCommissionRate(report.getCommissionRate());
+				rep.setContractEndDate(report.getContractEndDate());
+				rep.setContractStartDate(report.getContractStartDate());
+				rep.setCustomerName(report.getCustomerName());
+				rep.setKwh(report.getKwh());
+				rep.setRate(report.getRate());
+				System.out.println(rep.getRate());
+				rep.setSupplierFile(this.supplierDao.getSupplierFilesByFileName(report.getFileName()));
+				rep.setSupplierName(this.supplierDao.getSupplierByName(report.getSupplierName().getSupplierName()));				
+				rep.setTerm(report.getTerm());
+				rep.setTotalCommissionPaid(report.getTotalCommissionPaid());
+				rep.setUpfrontPaidDate(report.getDatePaid());
+				this.supplierDao.saveorUpdateSupplierReports(rep);			
+				
+				
+				//3.
+				Orders order=this.dealSheetDao.getOrderByAccountNumberandStartDate(report.getAccountNumber(), report.getContractStartDate());
+				Double prevCommission=order.getUpfrontCommission();
+				Double newCommission=report.getTotalCommissionPaid();
+				Double aggCommission=prevCommission+newCommission;
+				order.setUpfrontCommission(aggCommission);
+				if(null!=report.getDatePaid()){
+					order.setUpfrontPaidDate(report.getDatePaid());
+				}
+				else{
+					order.setUpfrontPaidDate(new Date());
+				}				
+				order.setStatus("approved");
+				order.setDealStartDate(report.getContractStartDate());
+				this.adminDao.editPipelineData(order);				
+			}	
+			return parsedreports;
+		}
+		
+		
+		
+		/*
+		 *Modified by  Jeevan on July 23,2013 in order to get the Accounts which are not in Pipeline to show in error message.
+		 *
+		 */		
+		public ArrayList<SupplierReports> getSupplierReportsData(ReportDto report)throws Exception{
+			
+			SupplierMapping mapping=this.supplierDao.getSupplierMappingBySupplier(report.getSupplierName());
+			SupplierMappingDto mappingDto=SupplierMappingDto.populateSupplierMappingDto(mapping);
+			ArrayList<SupplierReports> reports=this.parseSupplierReportFiles(mappingDto, report);
+			return reports;						
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		public ArrayList<SupplierReportsDto> getOrdersNotinPipeline(){
+			
+			return ordersNotinPipeline;
+		}*/
+		
+		
+		
+		/*//extension to saving supplier Report
+		public ArrayList<SupplierReports> getSupplierReportsData(ReportDto report)throws Exception{
+
+			SupplierMapping mapping=this.supplierDao.getSupplierMappingBySupplier(report.getSupplierName());
+			SupplierMappingDto mappingDto=SupplierMappingDto.populateSupplierMappingDto(mapping);
+			ArrayList<SupplierReports> reports=this.parseSupplierReportFiles(mappingDto, report);
+			SupplierFiles file=new SupplierFiles();
+			file.setFileName(report.getFileName());
+			SupplierFiles supplierFile=this.supplierDao.saveSupplierFile(file);
+			for(SupplierReports rep:reports){
+				rep.setSupplierFile(supplierFile);
+			}
+			
+			
+			 * 	change from model to dto and return dto
+			 * 			
+			 * ArrayList<SupplierReportsDto> reportDtos=new ArrayList<SupplierReportsDto>();
+					for(SupplierReports rep:reports){
+						SupplierReportsDto repDto=SupplierReportsDto.populateSupplierReportsDto(rep);
+					}
+			 * 
+			 *  			
+			this.supplierDao.saveorUpdateSupplierReports(reports);
+			for(SupplierReports rep:reports){
+				Orders order=this.dealSheetDao.getOrderByAccountNumber(rep.getAccountNumber());
+				Double prevCommission=order.getUpfrontCommission();
+				Double newCommission=rep.getTotalCommissionPaid();
+				Double aggCommission=prevCommission+newCommission;
+				order.setUpfrontCommission(aggCommission);
+				order.setUpfrontPaidDate(rep.getUpfrontPaidDate());
+				order.setStatus("approved");
+				order.setDealStartDate(rep.getContractStartDate());
+				this.adminDao.editPipelineData(order);				
+			}
+			
+			return reports;
+		}
+		*/
+		
+		
+		
+		// parses the Entire EXCel Filed, Makes use of Apache POI.
+		public ArrayList<SupplierReports> parseSupplierReportFiles(SupplierMappingDto mapping,ReportDto report)throws Exception{
+			int	accIndex = 0;
+			int comRateIndex=0,endDateIndex=100,startDateIndex=0,customerIndex = 0,kwhIndex = 0,rateIndex=200,termIndex=0,comPaidIndex=0,paidDateIndex=300;
+			Workbook workbook=null;
+			Sheet sheet=null;
+			Row titleRow=null;
+			Cell titleCell=null;
+			
+			ArrayList<SupplierReports> reports=new ArrayList<SupplierReports>();
+			String fileExtension=this.getFileExtension(report.getFile().getOriginalFilename());
+			
+			//handling file type extensions
+			if(fileExtension.equalsIgnoreCase("xlsx")){
+				workbook=new XSSFWorkbook(report.getFile().getInputStream());
+				workbook.createCellStyle().setAlignment(XSSFCellStyle.ALIGN_LEFT);
+			}
+			else if(fileExtension.equalsIgnoreCase("xls")){				
+				workbook=new HSSFWorkbook(report.getFile().getInputStream());
+				workbook.createCellStyle().setAlignment(HSSFCellStyle.ALIGN_LEFT);
+				
+			}				
+			
+			
+			//handles different types of suppliers to retreive respective tab containing report information
+			if(report.getSupplierName().equalsIgnoreCase("Glacial Energy")){
+				sheet=workbook.getSheetAt(1);
+			}
+			else{
+				sheet=workbook.getSheetAt(0);
+			}
+			
+			
+			//getting titles...
+			titleRow=sheet.getRow(0);
+			Iterator<Cell> titleIterator=titleRow.cellIterator();
+			while(titleIterator.hasNext()){
+				titleCell=titleIterator.next();
+				String title=titleCell.getStringCellValue();				
+				
+			//comparing Excel files header values with that of supplier mapping values
+				if(title.equalsIgnoreCase(mapping.getFieldForAccount()) || title.toLowerCase().contains(mapping.getFieldForAccount().toLowerCase())){
+					accIndex=titleCell.getColumnIndex();
+				}
+				if(title.equalsIgnoreCase(mapping.getFieldForCommissionRate()) || title.toLowerCase().contains(mapping.getFieldForCommissionRate().toLowerCase())){
+					comRateIndex=titleCell.getColumnIndex();
+				}
+				if(title.equalsIgnoreCase(mapping.getFieldForCustomer()) || title.toLowerCase().contains(mapping.getFieldForCustomer().toLowerCase())){
+					customerIndex=titleCell.getColumnIndex();
+				}
+				
+				if(!report.getSupplierName().equalsIgnoreCase("Glacial Energy")){
+					if(title.equalsIgnoreCase(mapping.getFieldForEndDate()) || title.toLowerCase().contains(mapping.getFieldForEndDate().toLowerCase())){
+						endDateIndex=titleCell.getColumnIndex();
+					}
+				}
+				
+				if(title.equalsIgnoreCase(mapping.getFieldForKwh()) || title.toLowerCase().contains(mapping.getFieldForKwh().toLowerCase())){
+					
+					kwhIndex=titleCell.getColumnIndex();
+				}
+				if(!report.getSupplierName().equalsIgnoreCase("Glacial Energy")){
+					if(title.equalsIgnoreCase(mapping.getFieldForPaidDate()) ){
+						paidDateIndex=titleCell.getColumnIndex();
+					}
+				}
+				
+				if(!report.getSupplierName().equalsIgnoreCase("Glacial Energy")){
+					if(title.equalsIgnoreCase(mapping.getFieldForRate()) || title.toLowerCase().contains(mapping.getFieldForRate().toLowerCase())){
+						rateIndex=titleCell.getColumnIndex();
+					}
+				}
+				if(title.equalsIgnoreCase(mapping.getFieldForStartDate()) || title.toLowerCase().contains(mapping.getFieldForStartDate().toLowerCase())){
+					startDateIndex=titleCell.getColumnIndex();					
+				}
+				
+				if(title.trim().equalsIgnoreCase(mapping.getFieldForTerm()) ){
+					termIndex=titleCell.getColumnIndex();
+				}
+				
+				if(title.equalsIgnoreCase(mapping.getFieldForTotalCommissionPaid()) || title.toLowerCase().contains(mapping.getFieldForTotalCommissionPaid().toLowerCase())){
+					comPaidIndex=titleCell.getColumnIndex();
+				}
+			//end of comparision	
+			}//end of title iterator
+			
+			
+			//Handling different cases of Datepaid
+			int tempIndex=paidDateIndex;
+			if(!report.getSupplierName().equalsIgnoreCase("Glacial Energy")){
+				while(paidDateIndex<=tempIndex+6 && sheet.getRow(1).getCell(paidDateIndex).getCellType()==Cell.CELL_TYPE_BLANK ){
+					paidDateIndex+=2;
+				}
+			}
+			
+		   //fetching data from rows based on indices obtained on above step..
+			int temp=0;
+			Supplier supplierName=this.supplierDao.getSupplierByName(report.getSupplierName());
+			Iterator<Row> rowIterator=sheet.iterator();
+			while(rowIterator.hasNext()){
+				Row row=rowIterator.next();
+				if(temp>=1){
+					if(null!=row.getCell(0) && row.getCell(0).getCellType()!=Cell.CELL_TYPE_BLANK){   //discarding empty rows.
+						SupplierReports supplierReport=new SupplierReports();
+						
+							
+						if(null!=row.getCell(accIndex)){
+							row.getCell(accIndex).setCellType(Cell.CELL_TYPE_STRING);
+							String accNo=row.getCell(accIndex).getStringCellValue().replaceAll("\\D+","");
+							supplierReport.setAccountNumber(accNo);
+							/*HoveyUser agent=this.dealSheetDao.getOrderByAccountNumber(row.getCell(accIndex).getStringCellValue()).getAgent();
+							supplierReport.setAgentId(agent);*/
+						}
+						
+						if(null!=row.getCell(customerIndex)){
+							row.getCell(customerIndex).setCellType(Cell.CELL_TYPE_STRING);
+							supplierReport.setCustomerName(row.getCell(customerIndex).getStringCellValue());
+						}
+						
+						if(null!=row.getCell(kwhIndex)){
+							row.getCell(kwhIndex).setCellType(Cell.CELL_TYPE_NUMERIC);
+							supplierReport.setKwh((int)row.getCell(kwhIndex).getNumericCellValue());
+						}
+						
+						if(report.getSupplierName().equalsIgnoreCase("Glacial Energy")){
+							supplierReport.setTerm("12");
+						}
+						else{
+							if(null!=row.getCell(termIndex)){
+								row.getCell(termIndex).setCellType(Cell.CELL_TYPE_STRING);
+								supplierReport.setTerm(row.getCell(termIndex).getStringCellValue());
+							}
+						}
+						
+						
+						if(null!=row.getCell(comPaidIndex)){
+							row.getCell(comPaidIndex).setCellType(Cell.CELL_TYPE_NUMERIC);
+							supplierReport.setTotalCommissionPaid(row.getCell(comPaidIndex).getNumericCellValue());
+							
+						}
+						
+						if(null!=row.getCell(comRateIndex)){
+							row.getCell(comRateIndex).setCellType(Cell.CELL_TYPE_NUMERIC);
+							supplierReport.setCommissionRate(row.getCell(comRateIndex).getNumericCellValue());
+						}
+						
+						if(null!=row.getCell(rateIndex) && rateIndex!=200){
+							row.getCell(rateIndex).setCellType(Cell.CELL_TYPE_NUMERIC);
+							supplierReport.setRate(row.getCell(rateIndex).getNumericCellValue());
+						}
+						
+						if(null!=row.getCell(startDateIndex)){								
+							supplierReport.setContractStartDate(this.getCellValueAsDate(row.getCell(startDateIndex)));
+						}						
+						if(null!=row.getCell(endDateIndex) && endDateIndex!=100){								
+							supplierReport.setContractEndDate(this.getCellValueAsDate(row.getCell(endDateIndex)));								
+						}
+						else{							
+							supplierReport.setContractEndDate(null);
+						}
+						
+						
+						if(null!=row.getCell(paidDateIndex) ){								
+							Date paidDate=getCellValueAsDate(sheet.getRow(1).getCell(paidDateIndex));
+							supplierReport.setUpfrontPaidDate(paidDate);								
+						}
+						
+						
+						
+						supplierReport.setSupplierName(supplierName);
+						
+						reports.add(supplierReport);
+					} //end of if					
+				}//end of temp check
+				temp++;
+				
+			}//end of row iterator
+			return reports;	
+		}
+
+
+		
+		/*
+		 * Added by Jeevan on July 24, 2013. 
+		 * 
+		 * Method to obtain Date value directly from Cell.
+		 * Coded it in order to convert all Date formats to MM/dd/yyyy;
+		 */
+		public  Date getCellValueAsDate(Cell cell) {
+				String strCellValue = null;
+				Date date=null;
+				if (cell != null) {
+					switch (cell.getCellType()) {
+					 	case Cell.CELL_TYPE_STRING:
+							strCellValue = cell.toString();
+							break;
+						case Cell.CELL_TYPE_NUMERIC:
+							if (DateUtil.isCellDateFormatted(cell)) {
+								SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+								strCellValue = dateFormat.format(cell.getDateCellValue());
+							} 
+							else {
+								Double value = cell.getNumericCellValue();
+								Long longValue = value.longValue();
+								strCellValue = new String(longValue.toString());
+							}
+							break;
+					}
+			}
+				
+			try{
+				date=new SimpleDateFormat("MM/dd/yyyy",Locale.US).parse(strCellValue);
+			}
+			catch(ParseException e){
+				log.error("Unable to PArsed Date from Supplier Reports "+e.toString());
+			}		
+			return date;
+		}
+		
+		
+		
+		
+		
+		//for Getting File Extensions..
+		private String getFileExtension(String fileName){
+			Assert.notNull(fileName);
+			int mid = fileName.lastIndexOf(".");
+			String ext = fileName.substring(mid + 1, fileName.length());		
+			return ext;
+		}
+		
+		//for validating SupplierFiles by its Name...		
+		public SupplierFiles getSupplierFileByName(String fileName) throws SupplierFileNotFoundException{
+			log.info("inside getSupplierFileByName()");
+			SupplierFiles file=this.supplierDao.getSupplierFilesByFileName(fileName);
+			return file;
+		}
+		
+		//getting all SupplierFiles...
+		public ArrayList<SupplierFilesDto> getSupplierFiles()throws SupplierFileNotFoundException{
+			log.info("inside getSupplierFiles()");
+			ArrayList<SupplierFiles> files=this.supplierDao.getSupplierFiles();
+			ArrayList<SupplierFilesDto> fileDtos=new ArrayList<SupplierFilesDto>();
+			for(SupplierFiles file:files){
+				SupplierFilesDto fileDto=SupplierFilesDto.populateSupplierFiles(file);
+				fileDtos.add(fileDto);
+			}
+			return fileDtos;
+		}
+		
+		
+		
+	
+}

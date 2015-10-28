@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agentreport.jrxml" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" lineSpacing="Single"/>
+	<style name="Zebra" lineSpacing="Single">
+		<box topPadding="2" bottomPadding="0"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#E0E0E0" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<style name="heading" mode="Opaque" forecolor="#FFFFCC" backcolor="#8C8C89" lineSpacing="Single">
+		<box topPadding="1"/>
+	</style>
+	<style name="style2" lineSpacing="Single"/>
+	<field name="agentName" class="java.lang.String"/>
+	<field name="totalOrders" class="java.lang.Integer"/>
+	<field name="totalKwh" class="java.lang.Integer"/>
+	<field name="totalExpectedCommission" class="java.lang.Double"/>
+	<field name="totalReceivedCommission" class="java.lang.Double"/>
+	<field name="rstartDate" class="java.util.Date"/>
+	<field name="rendDate" class="java.util.Date"/>
+	<field name="agentNumber.agentNumber" class="java.lang.String"/>
+	<field name="orderStatus" class="java.lang.String"/>
+	<field name="sentToSupplier" class="java.util.Date"/>
+	<variable name="totalOrders_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalOrders}]]></variableExpression>
+	</variable>
+	<variable name="totalKwh_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalKwh}]]></variableExpression>
+	</variable>
+	<variable name="totalExpectedCommission_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalExpectedCommission}]]></variableExpression>
+	</variable>
+	<variable name="totalReceivedCommission_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalReceivedCommission}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="82">
+			<image isLazy="true">
+				<reportElement x="12" y="9" width="185" height="62"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="122" y="57" width="329" height="20" forecolor="#174C71" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Serif" size="14" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Agent's Report]]></text>
+			</staticText>
+			<line>
+				<reportElement x="6" y="79" width="543" height="1"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29">
+			<staticText>
+				<reportElement x="166" y="5" width="112" height="16"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Showing reports from]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="278" y="4" width="63" height="17"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{rstartDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="356" y="5" width="69" height="17"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{rendDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="342" y="5" width="13" height="16"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[to]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39">
+			<frame>
+				<reportElement style="heading" x="5" y="4" width="548" height="30"/>
+				<staticText>
+					<reportElement style="heading" x="424" y="4" width="31" height="24" forecolor="#FFFFCC"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font fontName="Serif" size="9"/>
+					</textElement>
+					<text><![CDATA[Order Status]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="heading" x="464" y="4" width="69" height="24" forecolor="#FFFFCC"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font fontName="Serif" size="9"/>
+					</textElement>
+					<text><![CDATA[SentToSupplier Date]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement style="heading" x="17" y="8" width="41" height="17"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Serif" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Agent ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="heading" x="65" y="8" width="84" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Agent Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="heading" x="149" y="8" width="48" height="24"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Total Orders Sold]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="heading" x="212" y="10" width="52" height="24"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Total kWh Sold]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="heading" x="264" y="8" width="94" height="24"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Expected Overall Upfront Commission]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="heading" x="356" y="10" width="73" height="24"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Commission Received]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28">
+			<frame>
+				<reportElement style="Zebra" x="5" y="3" width="548" height="24"/>
+				<textField>
+					<reportElement style="Zebra" x="11" y="2" width="53" height="20"/>
+					<textElement lineSpacing="Single">
+						<font fontName="Serif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{agentNumber.agentNumber}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="Zebra" x="164" y="4" width="28" height="18"/>
+					<textElement lineSpacing="Single">
+						<font fontName="Serif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{totalOrders}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="424" y="2" width="40" height="20"/>
+					<textElement lineSpacing="Single">
+						<font fontName="Serif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{orderStatus}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement style="Zebra" x="81" y="5" width="68" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{agentName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;#,##0-" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="212" y="7" width="52" height="18"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalKwh}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="286" y="7" width="60" height="19"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalExpectedCommission}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="Zebra" x="358" y="3" width="60" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalReceivedCommission}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="488" y="6" width="42" height="19"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{sentToSupplier}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="80">
+			<staticText>
+				<reportElement x="190" y="57" width="166" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[Copyright 2013. All rights reserved.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="11" width="523" height="32"/>
+				<textElement textAlignment="Justified" lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[This document contains proprietary and confidential information of Hovey Energy, LLC and shall not be used, disclosed or reproduced, in whole or in part, for any purpose other than to benefit Hovey Energy, LLC. This document and all the information contained herein remains the property of Hovey Energy, LLC. Any violation will subject to the fullest extent of the law.  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="418" y="57" width="80" height="20"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="FixRelativeToBottom" x="498" y="57" width="40" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="17" y="4" width="523" height="3"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="72">
+			<line>
+				<reportElement x="17" y="42" width="523" height="1"/>
+			</line>
+			<line>
+				<reportElement x="17" y="11" width="523" height="1"/>
+			</line>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="182" y="18" width="50" height="20" forecolor="#990033" backcolor="#FFFFFF"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{totalOrders_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="238" y="18" width="95" height="20" forecolor="#990033" backcolor="#FFFFFF"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{totalKwh_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="338" y="19" width="110" height="20" forecolor="#990033" backcolor="#FFFFFF"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{totalExpectedCommission_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="449" y="18" width="95" height="20" forecolor="#990033" backcolor="#FFFFFF"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{totalReceivedCommission_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

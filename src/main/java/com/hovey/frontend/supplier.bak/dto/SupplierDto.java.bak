@@ -1,0 +1,132 @@
+package com.hovey.frontend.supplier.dto;
+
+import java.util.Date;
+
+import com.hovey.backend.supplier.model.Supplier;
+
+public class SupplierDto {
+	
+	private int id;
+	private String customerName;
+	private String accountName;
+	private String utility;
+	private Date contractDate;
+	private Date dealStartDate;
+	private Double rate;
+	private int term;
+	private int annualKWH;
+	private Date dealEndDate;
+	private Double fee;
+	private Double upfrontCommissionPaid;
+	private Date upfrontPaidDate;
+	private Date cutOff;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+	public String getUtility() {
+		return utility;
+	}
+	public void setUtility(String utility) {
+		this.utility = utility;
+	}
+	public Date getContractDate() {
+		return contractDate;
+	}
+	public void setContractDate(Date contractDate) {
+		this.contractDate = contractDate;
+	}
+	public Date getDealStartDate() {
+		return dealStartDate;
+	}
+	public void setDealStartDate(Date dealStartDate) {
+		this.dealStartDate = dealStartDate;
+	}
+	public Double getRate() {
+		return rate;
+	}
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+	public int getTerm() {
+		return term;
+	}
+	public void setTerm(int term) {
+		this.term = term;
+	}
+	public int getAnnualKWH() {
+		return annualKWH;
+	}
+	public void setAnnualKWH(int annualKWH) {
+		this.annualKWH = annualKWH;
+	}
+	public Date getDealEndDate() {
+		return dealEndDate;
+	}
+	public void setDealEndDate(Date dealEndDate) {
+		this.dealEndDate = dealEndDate;
+	}
+	public Double getFee() {
+		return fee;
+	}
+	public void setFee(Double fee) {
+		this.fee = fee;
+	}
+	public Double getUpfrontCommissionPaid() {
+		return upfrontCommissionPaid;
+	}
+	public void setUpfrontCommissionPaid(Double upfrontCommissionPaid) {
+		this.upfrontCommissionPaid = upfrontCommissionPaid;
+	}
+	public Date getUpfrontPaidDate() {
+		return upfrontPaidDate;
+	}
+	public void setUpfrontPaidDate(Date upfrontPaidDate) {
+		this.upfrontPaidDate = upfrontPaidDate;
+	}
+	public Date getCutOff() {
+		return cutOff;
+	}
+	public void setCutOff(Date cutOff) {
+		this.cutOff = cutOff;
+	}
+	
+	
+	
+	public static SupplierDto populateSupplier(Supplier supplier){
+		SupplierDto supplierDto=new SupplierDto();
+		supplierDto.setAccountName(supplier.getAccountNumber());
+		supplierDto.setAnnualKWH(supplier.getAnnualkwh());
+		supplierDto.setId(supplier.getId());
+		supplierDto.setContractDate(supplier.getContractDate());
+		supplierDto.setCustomerName(supplier.getCustomerName());
+		supplierDto.setCutOff(supplier.getCutOff());
+		supplierDto.setDealEndDate(supplier.getDealEndDate());
+		supplierDto.setDealStartDate(supplier.getDealStartDate());
+		supplierDto.setFee(supplier.getFee());
+		supplierDto.setRate(supplier.getRate());
+		supplierDto.setTerm(supplier.getTerm());
+		supplierDto.setUpfrontCommissionPaid(supplier.getUpfrontCommissionPaid());
+		supplierDto.setUpfrontPaidDate(supplier.getUpfrontPaidDate());
+		supplierDto.setUtility(supplier.getUtility());
+		
+		
+		return supplierDto;
+	}
+	
+
+}

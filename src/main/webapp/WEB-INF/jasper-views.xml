@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+  http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/util 
+  http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+ 
+     <!--here all the url value should contains the valid path for the jrxml file-->
+     
+    <bean id="pdfReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:commissionreports.jrxml"
+          p:reportDataKey="datasource"
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Commissions_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+    
+    
+      
+    <bean id="supplierReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:supplierreports.jrxml"
+          p:reportDataKey="datasource"
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Supplier_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+ 
+   <bean id="agentReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:agentreport.jrxml"
+          p:reportDataKey="datasource"
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Agent_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+ 
+    <bean id="agentOrderReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:agentorderreport.jrxml"
+          p:reportDataKey="datasource" 
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Agent_Order_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+    
+      <bean id="renewalReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:renewalreports.jrxml"
+          p:reportDataKey="datasource" 
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Renewals_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+      
+        <bean id="agentCommissionReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:agentcommissionreport.jrxml"
+          p:reportDataKey="datasource" 
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Agent_Commissions_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+      
+ 
+       <bean id="pipelineReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:pipelinereport.jrxml"
+          p:reportDataKey="datasource" 
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Pipeline_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+     
+       
+        <bean id="anniversaryReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:anniversaryreports.jrxml"
+          p:reportDataKey="datasource" 
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Anniversary_Payments_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+     
+  
+        <bean id="anniversaryDueReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:anniversaryreports.jrxml"
+          p:reportDataKey="datasource" 
+           p:contentType="application/pdf">
+            <property name="headers">
+            <props>
+                <prop key="Content-Disposition">attachment; filename=Due_Anniversary_Payments_Report.pdf</prop>
+            </props>
+        </property>
+     </bean>
+     
+        
+</beans>

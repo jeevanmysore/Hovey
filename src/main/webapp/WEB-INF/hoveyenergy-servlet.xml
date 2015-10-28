@@ -1,0 +1,99 @@
+<div style="margin-top:3px;background:#ddddff;" class="crit" id="customPar" >
+  <div style="float:left;">
+	<button type="button value="6" onclick="changeCriteria(6);" class="weekBtn" style="margin-left:0px;background:#E7E99E;">7d</button>
+	
+		<button type="button value="13" onclick="changeCriteria(13);" class="weekBtn" style="background:#E7E99E;">14d</button>
+		
+			<button type="button value="20" onclick="changeCriteria(20);" class="weekBtn" style="background:#E7E99E;">21d</button>
+			
+				<button type="button value="27" onclick="changeCriteria(27);" class="weekBtn" style="background:#E7E99E;">28d</button>
+				
+					<button type="button value="-1" onclick="changeCriteria(-1);"class="weekBtn" style="background:#E7E99E;">YTD</button>
+		
+		</div>
+		<div style="float:right;" id="monthDiv">		
+				<button type="button" value="jan" onClick="changeMonthCriteria(0,31);" class="mnthBtn" style="background:#B7FBBF;">Jan</button>
+	<button type="button" value="feb" onClick="changeMonthCriteria(1,28);" class="mnthBtn"  style="background:#B7FBBF;">Feb</button>
+    <button type="button" value="mar" onClick="changeMonthCriteria(2,31);" class="mnthBtn"  style="background:#B7FBBF;">Mar</button>
+	<button type="button" value="apr" onClick="changeMonthCriteria(3,30);" class="mnthBtn"  style="background:#B7FBBF;">Apr</button>
+	<button type="button" value="may" onClick="changeMonthCriteria(4,31);" class="mnthBtn"  style="background:#B7FBBF;">May</button>
+    <button type="button" value="jun" onClick="changeMonthCriteria(5,30);" class="mnthBtn"  style="background:#B7FBBF;">Jun</button>
+    
+    	<button type="button" value="jul" onClick="changeMonthCriteria(6,31);" class="mnthBtn"  style="background:#B7FBBF;">Jul</button>
+	<button type="button" value="aug" onClick="changeMonthCriteria(7,31);" class="mnthBtn"  style="background:#B7FBBF;">Aug</button>
+    <button type="button" value="sep" onClick="changeMonthCriteria(8,30);" class="mnthBtn"  style="background:#B7FBBF;">Sep</button>
+	<button type="button" value="oct" onClick="changeMonthCriteria(9,31);" class="mnthBtn"  style="background:#B7FBBF;">Oct</button>
+	<button type="button" value="nov" onClick="changeMonthCriteria(10,30);" class="mnthBtn"  style="background:#B7FBBF;">Nov</button>
+    <button type="button" value="dec" onClick="changeMonthCriteria(11,31);" class="mnthBtn"  style="background:#B7FBBF;">Dec</button>
+    
+
+				
+					
+		<button id="popup" onclick="div_show()" class="mnthBtn" style="padding-right:10px;padding-left:10px;"  style="background:#B4E1E9;">Custom</button>			
+		
+		
+	</div>
+	
+	
+</div>
+
+
+<div id="abc">
+	<div style="background:#FFF; border: 2px solid #8E8E8E;margin-top:5px;display:inline-block;padding-left:10px;padding-right:10px;padding-top:12px; padding-bottom:12px;margin-left:5px;border-radius:5px;width:550px;">
+		
+		<div style="display:inline-block;">
+			<div style="display:block;float:left;">		
+				<label>Start Date : </label>
+				<input type="text" name="startdate" placeholder="Start Date (YYYYY-MM-DD)" id="startdate" onfocus="displayDatePicker('startdate');" onclick="displayDatePicker('startdate');" style="height:25px;"/>
+			</div>
+			<div style="display:block;float:right;margin-left:40px;">
+				<label>End Date:</label>
+				<input type="text" name="enddate" placeholder="End Date (YYYY-MM-DD)" id="enddate" onclick="displayDatePicker('enddate');" onfocus="displayDatePicker('enddate');" style="height:25px;"/>
+			</div>
+		</div>
+		<div style="margin-top:10px;">
+			<button type="button" value="Filter" onClick="changeDateCriteria();" style="height:30px;font-weight:bold;">Filter</button>
+			<button id="close" onclick="div_hide()" style="height:30px;font-weight:bold;">Close</button>
+		</div>
+</div>
+</div>
+
+
+<script>
+	function changeCriteria(period){
+		
+		var d = "<VALUE-OF>params["Date"]</VALUE-OF>";
+    	var now = new Date();
+    	if(period==-1){
+    	
+    		var todaydate=new Date();    		
+    		var ytdate=new Date(now.getFullYear(),0,1);    		
+    		var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+    		period=Math.round(Math.abs((ytdate.getTime() - todaydate.getTime())/(oneDay)))-1;
+    	}    	
+    	
+    	
+    	var month = now.getMonth() + 1;
+		var dateString = now.getFullYear() + "-" +  month + "-" + now.getDate() ;
+		var url = "<value-of>row["url_base"]</value-of>"+"/Datavis/frameset?__report=Crime Analysis.rptdesign&Category=<VALUE-OF>params["Category"]</VALUE-OF>&Period="+period+"&db_schema=<VALUE-OF>params["db_schema"]</VALUE-OF>&where%20clause=<value-of>params["where clause"].value</value-of>&Date="+dateString
+    		window.open(url,"_self");
+	
+	}
+	
+	function changeMonthCriteria(month,endDay){
+ 		
+	
+ 		var date=new Date();
+ 		var startDate=new Date(date.getFullYear(),(month),01);
+ 	    var endDate=new Date(date.getFullYear(),(month),endDay);
+ 	    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+    	var	period=Math.round(Math.abs((new Number(startDate.getTime()) - new Number(endDate.getTime()))/(oneDay)));
+    	
+    	
+		var dateString = endDate.getFullYear() + "-" +  (month+1) + "-" + endDate.getDate() ;
+		var url = "<value-of>row["url_base"]</value-of>"+"/Datavis/frameset?__report=Crime Analysis.rptdesign&Category=<VALUE-OF>params["Category"]</VALUE-OF>&Period="+period+"&db_schema=<VALUE-OF>params["db_schema"]</VALUE-OF>&where%20clause=<value-of>params["where clause"].value</value-of>&Date="+dateString;
+    		window.open(url,"_self");
+    	
+ 	}
+ 	
+</script>

@@ -1,0 +1,555 @@
+	#feedback{
+	 		display: inline;
+			position: relative;
+			left: -500px;
+			color: green;
+			font-size: 20px;
+	 	}
+	 	#test ul{
+	           		width:20% !important;
+	           		float:left !important;
+	           }
+	    #test label{
+	    	width:222px !important;
+	    }
+	    
+	    #test .smallul{
+	    	width:14.5% !important;
+	    }
+	    #test .bigul{
+	    	width:25.2% !important;
+	    }
+	    
+	    .login_button2 .submit1_button{
+	    	background: url(/hoveyenergy/images/submit.png);
+	    	width: 180px;
+			height: 38px;
+	    }
+	    
+	     .login_button2 .addmore_button{
+	     	background: url(/hoveyenergy/images/add.png);
+	     	width: 180px;
+			height: 38px;
+	     }
+	     
+	     .accTitle{
+	     	font-size: 14px;
+	     	font-weight: bold;
+	     	padding-left: 10px;
+	     	  COLOR: #FFFFFF; 
+            TEXT-DECORATION: none; 
+            background: #2669B5;
+            font-family: verdana,arial; 
+            margin-top: 5px;
+            margin-bottom: 5px;
+	     }
+	     
+	     
+	      .accTitle1{
+	     	font-size: 14px;
+	     	font-weight: bold;
+	     	padding-left: 10px;
+	     	  COLOR: #FFFFFF; 
+            TEXT-DECORATION: none; 
+            background: #F71F30;
+            font-family: verdana,arial; 
+            margin-top: 5px;
+            margin-bottom: 5px;
+	     }
+	     
+	     .chkbox{
+	     	font-family:Arial;	     	
+	     	  font-size:11px;
+	     	   font-weight:normal;
+	     	   margin-top: -2px;
+	     }
+	     
+	     .ui-datepicker-trigger{
+	     	width:20%;
+	     	height:20px;
+	     }
+	     
+	    /*
+		 .ui-datepicker-calendar{
+					 display:none;
+				 }*/
+		
+	     
+	     .accsize{
+	     	margin-bottom:-10px;
+	     	margin-top: -11px;
+	     	height:21px;
+	     }
+	     
+	     .service{
+	     	color:white;
+	     	font-size: 14px;
+	     }
+	    
+	    .svcchk{
+	    	margin-top: -3px !important;
+	    }
+	    
+		.row-fluid{
+			display: inline-block;
+			}
+
+
+
+		.disclaimer{
+			clear: both;
+			display:block;
+			/* position:static;
+			bottom:2px; */
+			margin-left:2%;
+			width:90%;
+			text-align:center;
+			font-size: 12px;
+			color:#807C7C;
+			text-indent: 50px;			
+		}
+		
+		 .ui-datepicker-prev, .ui-datepicker-current{
+	 	display: none !important;
+	 	
+	 }
+		
+		
+		.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .btn-success.disabled, .btn-success[disabled],
+		.btn:hover, .btn:focus,.btn-success,.btn-primary,.btn-danger,.btn-print
+		{
+			 behavior: url(js/js/PIE.htc);
+			position:relative;
+			-webkit-box-shadow: 0px 0px 5px #c2c2c2;
+  			box-shadow: 5px 7px 5px #c2c2c2;
+		}
+		
+		.btn-print {
+			background-color: #FA8202;
+			background:  #FA8202;
+			color:#fff;
+		}
+		
+		.btn-print:hover, .btn-print:focus, .btn-print:active{
+		
+			background:  #E07604;
+			color:#fff;
+		}
+		
+		.startdate3{
+			width:11%;margin-left:1.5%;margin-top: -4px;display: inline-block;
+		}
+		
+		.row-fluid [class="span"]{
+			margin-left: 1.4%;
+		}
+		
+		.agnt1{
+			margin-left: 15px;
+		}
+		
+		/* #menu li,#menu a{
+	 		float:none !important;
+	 		font: bold 16px/25px Arial, Helvetica;
+	 	}
+	  */
+	 
+		.CSSTableGenerator tr:first-child td {
+			font-size: 10px !important;
+		}
+
+		.CSSTableGenerator table {
+			width: 95% !important;
+			margin: 0 auto !important;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		 @media print 
+		{
+			#header{
+				margin-top:-2px !important;
+			}
+			body, html{
+			    height:100% !important;
+			    padding:0 !important;
+			    min-height: 100% !important;
+			}
+		    .noPrint 
+		    {
+		        display:none;
+		    }
+		    
+		    .title{
+		    	text-align: center;
+		    	font-weight: bold;
+		    }
+		    
+		    #user{
+		    	display: none;
+		    }
+		    
+		    .input-large{
+		    	width: 200px;
+		    }
+		    
+		    .title{
+		    	margin:0px;
+		    }
+		    .span9,#cust_check,.exCust,.error_msg,#feedback1, .chkbox, .ui-datepicker-trigger, #clearBtn,.accsize {
+		    	display: none !important;
+		    }
+		    
+		    .datepicker{
+		    	width:100%;
+		    }
+		    
+		    #outerContainer{
+		    	padding:0px;
+		    }
+		    .stitle{
+		    	height: 20px!important;
+		    }
+		    .controls-row {
+				margin-top: -5px;
+			}
+			
+			input, textarea, .uneditable-input{
+				font-size: 12px !important;
+				font-family:Times New Roman !important;
+				padding-left:0px !important;
+				/* padding: 0px !important; */
+				
+			}
+			
+			select{
+				font-size: 12px !important;
+				font-family:Times New Roman !important;
+				padding-left:0px !important;
+				padding-top: 2px !important;
+				
+			}
+			
+			.lowfont{
+				font-size: 8px !important;
+			}
+			
+			
+			
+			.acc{
+				width: 100% !important;
+				font-size: 10px !important;
+			}
+		    .row-fluid [class="span"] {
+		    
+		   		 min-height: 20px !important;
+		    	 max-height: 45px;		    	
+		    }
+		    
+		    .agnt{
+		    	margin-left: 1.2% !important;
+		    	width:24% !important;
+		    }
+		    
+		    .agnt input[type="text"]{
+		    	width:97% !important;
+		    }
+		    
+		   .agnt select{
+		    	width:101% !important;
+		    }
+		    
+		    .agnt1 {
+		    	margin-left:2.4% !important;
+		    	width:22% !important;
+		    }
+		    
+		      .agnt1 input[type="text"],.agnt1 select{
+		    	width:97% !important;
+		    }
+		   
+		    
+		    #comres , #fronter{
+		    	width:101% !important;
+		    }
+		    .cmn{
+		    	
+		    	margin-left: 1.9% !important;
+		    }
+		    
+		    .cmn select{
+		    	width:100% !important;
+		    }
+		    
+		    
+		      .cmn1 {
+		    	margin-left:2.4% !important;		    	
+		    }
+		    
+		    
+		    .txex{
+		    	width: 18% !important;	
+		    	margin-left: 1.9% !important;	    	
+		    }
+		    
+		   #taxexempt{
+		   	  width: 88% !important;
+		   } 
+		    
+		    .buss{
+		    	width: 100% !important;
+		    }
+		    
+		    .util{
+		    	width:15% !important;
+		    }
+		    
+		    .officenotes{
+		    	clear:both !important;
+		    	display: inline-block ! important;
+		    	margin-top: 40px;
+		    	
+		    }
+		    
+		    .comments{
+		    	min-height: 150px;
+		    
+		    	margin-top: 5px !important;
+		    }
+		    
+		    a[href]:after {
+    			content: none !important;
+ 			 }
+ 			 
+ 			 label,button {
+ 			 	font-size: 11px !important;
+ 			 	font-family: Times New Roman !important;
+ 			 	padding: 0px !important;
+ 			 	text-decoration: none;
+ 			 
+ 			 }			 
+ 			/*  .seperator{
+ 			 	background-color:blue ! important ;
+ 			 	width: 100% ! important;
+ 			 	height: 1px ! important; 	
+ 			 	margin-bottom: 10px ! important; 
+ 			 	margin-top: 10px ! important; 
+ 			 } */
+ 			 
+ 			 .tpv{
+ 			 	width:105% ! important;
+ 			 }
+ 			 .strDate{
+ 			 	width:107.8% !important;
+ 			 }
+ 			 
+ 			 .strDate2{
+ 			 	width:105.5% !important;
+ 			 }
+ 			 .addr{
+	     	width: 95% !important;
+	     	margin-left: 15% !important;
+	     }
+	     
+	      .addr1{
+	     	width: 92.2% !important;
+	     	margin-left: 15% !important;
+	     }
+ 		
+ 		.street{
+ 			width: 100% !important;
+ 		}	
+ 			
+ 		 .accTitle{
+ 		 	clear:both !important;
+	     	font-size: 14px !important;
+	     	font-weight: bold !important;
+	     	margin-left: 10px !important;
+	     	  COLOR: #FFFFFF !important; 
+	     	  
+            TEXT-DECORATION: none !important; 
+            background: #9A9A9B !important;
+            font-family: verdana,arial !important; 
+                 
+	     }	 
+	     
+	     .sprice{
+	     	/* font-size:8px !important;
+	     	font-family: Times New Roman !important; */
+	     	display: none !important; 
+	     }
+	     
+	     .service{
+	     	
+	     	font-size: 8px !important;
+	     }
+	     
+	     .orderacc{
+	     	clear:both !important;
+	     }
+	     
+	     .strdate2{
+	     	margin-left: 1.3% !important;
+	     }
+	     
+	     .startdate3{
+	     	margin-left: 1.3% !important;
+	     	width:10%!important;
+	     	display: inline-block;
+	     }
+	     
+	     .add{
+	     	margin-left: 15px !important;
+	     }
+	     
+	     .bzip{
+	     	width: 110% !important;
+	     	margin-left: 5px !important;
+	     }
+	     
+	     .row-fluid{
+	     	display: inline-block !important;
+	     }
+	     
+	     .highrate{
+	     	border: 2px solid !important;
+	     }
+	     
+	     .disclaimer{
+	     	
+	     	/* clear:both !important;
+	     	page-break-before:always;
+	     	position:absolute !important;
+	     	bottom:0px !important;    */
+	     	width:89% !important;
+	     	display:block!important;
+	     	font-size: 10px !important;
+			color:#807C7C !important;
+			text-indent:0px !important;
+			margin-bottom: 10px !important;
+			width:auto !important;
+			text-align: center !important;
+			margin-right:4%;
+	     }
+	     
+	    .county{
+	    	margin-left: 2% !important;
+	    	width: 12% !important;
+	    }
+	    
+	    .meter{
+	    	margin-left: 0% !important;
+	    	width: 13% !important;
+	    }
+	    
+	    .dba{
+	    	width:22% !important;
+	    }
+	     
+	    .street1{
+	    	width: 40% !important;
+	    }
+	    
+	    .unit{
+	    	
+	    	margin-left: 0% !important;
+	    }
+	    
+	    .state2{
+	    	width: 12% !important;
+	    }
+	}
+	
+	
+/* End of Print */
+	
+	#overlay_form{
+				position: absolute;
+				border: 5px solid rgb(140, 177, 231);
+				padding: 10px;
+				background: white;
+				width: 475px;
+				height: auto;
+				border-radius: 3px;		   
+			    behavior: url(js/js/PIE.htc);
+				z-index: 9999;
+			}	
+			
+			
+		#overlay_form .fc-text1{			
+			font-size: 10px;
+			font-weight: bold;
+			color: #999;
+			float: left;
+			width: 450px;
+			margin-left: 30px;
+			width: 250px!important;
+			
+		}
+		
+		#overlay_form .fc-text {
+			font-size: 12px;
+			font-weight: bold;
+			color: #000000;
+			float: left;
+			margin-bottom: 2px;
+			margin-top: 10px;
+			width: 180px;
+			text-align: right;
+		}
+		
+		#overlay_form .su-menu {
+			float: right;
+			height: 33px;
+			width: 226px;
+			width: none;
+			font-size: 12px;
+			font-weight: bold;
+			text-align: right;
+			margin-right: 30px;
+			margin-right: 103px;
+			padding: 10px;
+		}
+		
+		
+		#overlay_form input[type="submit"] {
+			-moz-border-bottom-colors: none;
+			-moz-border-left-colors: none;
+			-moz-border-right-colors: none;
+			-moz-border-top-colors: none;
+			background: none repeat scroll 0 0 #52A8E8;
+			border-color: -moz-use-text-color -moz-use-text-color #4081AF;
+			border-image: none;
+			border-radius: 5px 5px 5px 5px;
+			border-style: none none solid;
+			border-width: 0 0 2px;
+			color: #FFFFFF;
+			padding: 7px 16px;
+			text-align: center;
+			width: auto;
+		}
+		
+		#overlay_form input[type="submit"]:hover, input[type="submit"]:active {
+			cursor: pointer;
+			background: #377AD0;
+		}
+
+			
